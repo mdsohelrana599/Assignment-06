@@ -1,11 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Green Earth</title>
+    <link rel="shortcut icon" href="./assets/about.png" type="image/x-icon">
+    <link rel="stylesheet" href="style/style.css">
+
+    <!-- tailwind/daisyui -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
+
 <body>
+    <header class="bg-[#15803D] text-white">
+        <div class=" p-4 flex md:flex-row gap-5 flex-col justify-between items-center px-12 mx-auto">
+            <h1 class="text-xl font-bold">Green Earth</h1>
+            <nav class="space-x-4">
+                <a href="#about" class="hover:underline">About</a>
+                <a href="#gallery" class="hover:underline">Gallery</a>
+                <a href="#plant" class="hover:underline">Plant a Tree</a>
+            </nav>
+            <button class="bg-[#FACC15] text-[#15803D] px-4 py-2 rounded-full hover:bg-[#b2910d]">Plant a Tree</button>
+
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <section class="bg-[#CFF0DC]  flex items-center justify-center text-center relative  ">
+        <div
+            class="absolute  left-0 top-0 h-full w-2/4 bg-[url(./assets/hero-leaf1.png)] bg-no-repeat bg-left bg-contain hidden sm:block">
+        </div>
+        <div
+            class="absolute right-0 top-0 h-full w-2/4 bg-[url(./assets/hero-leaf2.png)] bg-no-repeat bg-right bg-contain hidden sm:block">
+        </div>
+        <div class="bg-center h-70 flex flex-col justify-center items-center">
+            <h1 class="text-4xl font-bold mb-4">Plant a Tree, Grow a Future</h1>
+            <p class="mb-4">Join our mission to plant 1 million trees and make the Earth greener for future <br>
+                generations.</p>
+            <button class="bg-[#FACC15] text-[#15803D] px-4 py-2 rounded-full hover:bg-[#b2910d]">Get Involved</button>
+        </div>
+    </section>
+
+
+
+
     
+<script src="./script.js"></script>
 </body>
+
 </html>
