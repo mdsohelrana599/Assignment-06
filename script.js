@@ -1,6 +1,11 @@
 const categorieList = document.getElementById("category-list");
 const cardContaner = document.getElementById("card-contaner");
+
 const cardList = document.getElementById("cart-list");
+const showModal = document.getElementById("show_modal");
+const modelContenar = document.getElementById("modelContenar");
+
+
 
 
 let addToCard = [];
@@ -31,6 +36,7 @@ const showCategory = (categories) => {
     });
 
     if (e.target.localName === "li") {
+      showLoading();
       e.target.classList.add("bg-[#15803D]");
       loadTreeCategory(e.target.id);
     }
@@ -59,7 +65,7 @@ const showCardCategory = (plants) => {
                         <h2 class="text-xl font-bold mt-2">${plant.name}</h2>
                         <p class="text-[#5C5C5C] text-sm my-2">${plant.description}</p>
                         <div class="flex justify-between items-center">
-                            <span class="badge px-4 py-3 rounded-full bg-[#DCFCE7] text-[#5C5C5C]">${plant.category}</span>
+                            <button onclick="hendlAddToModel(e)" class="badge px-4 py-3 rounded-full bg-[#DCFCE7] text-[#5C5C5C]">${plant.category}</button>
                             <p> ৳<span id="cart-total">${plant.price}</span></p>
                         </div>
                         <button class="btn bg-[#15803D] hover:bg-[#0c5427] text-white w-full rounded-full mt-2">Add to Cart</button>
@@ -74,6 +80,7 @@ cardContaner.addEventListener("click", (e) => {
   if (e.target.innerText === "Add to Cart") {
     hendlAddToCard(e);
   }
+
 });
 
 const hendlAddToCard = (e) => {
@@ -88,7 +95,6 @@ const hendlAddToCard = (e) => {
   });
 
   showAddCard(addToCard);
-  
 };
 
 const showAddCard = (addToCard) => {
@@ -100,15 +106,13 @@ const showAddCard = (addToCard) => {
                     class="space-y-2 bg-[#F0FDF4] hover:bg-[#DCFCE7] mt-3 px-3 flex justify-between rounded-lg items-center">
                     <div>
                         <h2 class="font-bold">${addToCards.name}</h2>
-                        <p class="text-[#5C5C5C] mt-1"> ৳<span>${addToCards.price}</span> * <span id="addCard-Cound">${addToCards.id}</span> </p>
+                        <p class="text-[#5C5C5C] mt-1"> ৳<span>${addToCards.price}</span> * <span">${addToCards.id}</span> </p>
                     </div>
                     <button onclick="hendlDeleteCard('${addToCards.id}')" class"btn"><i class="fa-solid fa-xmark  hover:text-[#e55555]"></i></button>
                 </div>
         
         `;
   });
-
-  
 };
 
 const hendlDeleteCard = (addToCardId) => {
@@ -117,6 +121,38 @@ const hendlDeleteCard = (addToCardId) => {
   );
   addToCard = filtercard;
   showAddCard(addToCard);
+};
+
+const hendlAddToModel = (e) => {
+  const card = e.target.closest("div"); 
+  const categoryid = card.id;
+
+  
+  fetch(`https://openapi.programming-hero.com/api/plant/${categoryid}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const plant = data.plant;
+
+      
+      modelContenar.innerHTML = `
+        <h2 class="text-xl font-bold">${plant.name}</h2>
+        <img src="${plant.image}" class="w-full h-[200px] mt-3 rounded-lg">
+        <p class="mt-2 text-sm text-gray-600">${plant.description}</p>
+        <p class="mt-2 font-semibold">Category: ${plant.category}</p>
+        <p class="mt-1 font-semibold">Price: ৳${plant.price}</p>
+      `;
+
+      
+      showModal.showModal();
+    });
+};
+
+
+const showLoading = () => {
+  cardContaner.innerHTML = `
+    <div class=" text-center flex justify-end  "><span class="loading loading-spinner loading-xl text-center"></span>
+                </div>
+    `;
 };
 
 lodeCategory();
